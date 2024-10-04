@@ -1,0 +1,29 @@
+
+
+plugins {
+    id 'com.android.application' version '8.0.2' // Update to a compatible version
+    id 'org.jetbrains.kotlin.android' version '1.7.0' // Ensure compatibility
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = '../build'
+
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+    project.evaluationDependsOn(':app')
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
